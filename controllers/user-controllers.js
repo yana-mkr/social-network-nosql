@@ -2,6 +2,7 @@ const { User } = require('../models');
 
 const userController = {
 
+    // get all users
     getAllUsers(req, res) {
         User.find()
             .populate({
@@ -15,6 +16,7 @@ const userController = {
                 res.status(400).json(user)
             })
     },
+    // a sync attempt
     // get all users
     // async getAllUsers(req, res) {
     //     try {
@@ -33,7 +35,7 @@ const userController = {
 
     // get one user by id
     getUserById(req, res) {
-        console.log(req.params)
+        // console.log(req.params)
         User.findOne({ _id: req.params.id })
             .populate({
                 path: 'thoughts',
@@ -82,7 +84,7 @@ const userController = {
 
     // delete user
     deleteUser(req, res) {
-        console.log(req.params)
+        // console.log(req.params)
         User.findOneAndDelete({ _id: req.params.id })
             .then(dbUserData => {
                 if (!dbUserData) {
@@ -94,8 +96,9 @@ const userController = {
             .catch(err => res.status(400).json(err));
     },
 
+    // add a friend
     addFriend(req, res) {
-        console.log(req.params)
+        // console.log(req.params)
         User.findOneAndUpdate(
             { _id: req.params.userId },
             { $push: { friends: req.params.friendId } },
@@ -111,6 +114,7 @@ const userController = {
             .catch(err => res.json(err));
     },
 
+    // delete a friend
     deleteFriend(req, res) {
         User.findOneAndUpdate(
             { _id: req.params.userId },
