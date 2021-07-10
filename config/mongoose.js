@@ -10,6 +10,8 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/social-network-
     useFindAndModify: false,
     // uses new topology engine to handle server items such as reconnections 
     useUnifiedTopology: true,
+
+    useCreateIndex: true
 });
 
 // MongoDB driver deprecated `ensureIndex()` in favor of `createIndex()`
